@@ -61,3 +61,7 @@ variable "bucket_name" {
   type        = string
   default     = "my-default-bucket-name"
 }
+
+output "ec2_public_ip" {
+  value = aws_instance.example.public_ip
+}
