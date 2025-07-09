@@ -13,7 +13,12 @@ pipeline {
             terraform validate
             terraform plan
             terraform apply -auto-approve
-            ansible-playbook playbook.yml
+          '''
+        }
+        // This block uses your SSH key for Ansible
+        withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh', keyFileVariable: 'SSH_KEY')]) {
+          sh '''
+            ansible-playbook -i inventory.ini playbook.yml --private-key $SSH_KEY
           '''
         }
       }
