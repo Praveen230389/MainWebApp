@@ -13,7 +13,7 @@ terraform {
 
 resource "aws_key_pair" "global" {
   key_name   = "global-key"
-  public_key = file("/home/haudharys/.ssh/global-key.pub")
+  public_key = file("${path.module}/keys/global-key.pub")
 }
 
 resource "aws_instance" "example" {
