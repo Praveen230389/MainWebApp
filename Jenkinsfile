@@ -25,3 +25,19 @@ pipeline {
     }
   }
 }
+
+stage('Generate Inventory') {
+  steps {
+    sh '''
+      PUBLIC_IP=$(terraform output -raw ec2_public_ip)
+      echo "[myec2]" > inventory.ini
+      echo "$PUBLIC_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/global-key" >> inventory.ini
+    '''
+  }
+}
+
+stage('Run Ansible') {
+  steps {
+    sh 'ansible-playbook -i inventory.ini playbook.yml'
+  }
+}
