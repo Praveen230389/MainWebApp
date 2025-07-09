@@ -12,6 +12,8 @@ pipeline {
             terraform init
             terraform validate
             terraform plan
+            terraform apply
+            ansible-playbook playbook.yml
           '''
         }
       }
