@@ -31,14 +31,12 @@ pipeline {
     }
 
     stage('Run Ansible Playbook') {
-      steps {
-        withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh', keyFileVariable: 'SSH_KEY')]) {
-          sh '''
-          ANSIBLE_HOST_KEY_CHECKING=False
-            ansible-playbook -i inventory.ini playbook.yml --private-key $SSH_KEY
-          '''
-        }
-      }
+  steps {
+    withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh', keyFileVariable: 'SSH_KEY')]) {
+      sh '''
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ansible-playbook -i inventory.ini playbook.yml --private-key $SSH_KEY
+      '''
     }
   }
 }
