@@ -1,1 +1,1 @@
-bucket_name = "my-awesome-bucket-123"
+bucket_name = "projectimage1bucket"
