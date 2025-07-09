@@ -1,1 +1,1 @@
-bucket_name = "projectimage2bucket"
+bucket_name = "projectimage3bucket"
