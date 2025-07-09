@@ -22,7 +22,7 @@ resource "aws_instance" "example" {
   key_name      = aws_key_pair.global.key_name
 
   tags = {
-    Name = "MyEC2Instance"
+    Name = "MyEC2Instanceparttwo"
   }
 }
 
