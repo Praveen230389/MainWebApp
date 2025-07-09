@@ -13,13 +13,13 @@ terraform {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "my-key"
-  public_key = file("~/.ssh/my-key.pub")
+  public_key = file("~/.ssh/global-key.pub")
 }
 
 resource "aws_instance" "example" {
   ami           = "ami-0c02fb55956c7d316" # Amazon Linux 2 (example)
   instance_type = "t2.micro"
-  key_name      = aws_key_pair.deployer.key_name
+  key_name = aws_key_pair.global.key_name
 
   tags = {
     Name = "MyEC2Instance"
