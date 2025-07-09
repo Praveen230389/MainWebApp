@@ -19,16 +19,17 @@ pipeline {
     }
 
     stage('Generate Dynamic Inventory') {
-      steps {
-        sh '''
-          PUBLIC_IP=$(terraform output -raw ec2_public_ip)
-          echo "[myec2]" > inventory.ini
-          echo "$PUBLIC_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/global-key" >> inventory.ini
-          echo "Dynamic inventory generated:"
-          cat inventory.ini
-        '''
-      }
-    }
+  steps {
+    sh '''
+      PUBLIC_IP=$(terraform output -raw ec2_public_ip)
+      echo "[myec2]" > inventory.ini
+      echo "$PUBLIC_IP ansible_user=ec2-user" >> inventory.ini
+      echo "Dynamic inventory generated:"
+      cat inventory.ini
+    '''
+  }
+}
+
 
     stage('Run Ansible Playbook') {
       steps {
