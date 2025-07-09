@@ -19,6 +19,7 @@ resource "aws_key_pair" "deployer" {
 resource "aws_instance" "example" {
   ami           = "ami-0c02fb55956c7d316" # Amazon Linux 2 (example)
   instance_type = "t2.micro"
+  key_name      = aws_key_pair.deployer.key_name
 
   tags = {
     Name = "MyEC2Instance"
