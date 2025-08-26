@@ -19,7 +19,7 @@ spec:
           ports:
             - containerPort: 8080
       imagePullSecrets:
-        - name: mysecretname
+        - name: dockerhub-secret
 
 ---
 apiVersion: v1
