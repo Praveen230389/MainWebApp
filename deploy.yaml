@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-java-project-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-java-project
+  template:
+    metadata:
+      labels:
+        app: my-java-project
+    spec:
+      containers:
+        - name: my-java-project
+          image: praveen230389/my-java-project:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: mysecretname
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-java-project-service
+spec:
+  selector:
+    app: my-java-project
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
