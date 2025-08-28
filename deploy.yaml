@@ -18,8 +18,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-      imagePullSecrets:
-        - name: mysecretname
 
 ---
 apiVersion: v1
